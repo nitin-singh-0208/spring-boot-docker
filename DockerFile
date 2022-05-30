@@ -1,0 +1,20 @@
+##FROM docker-hub.repo1.uhc.com/adoptopenjdk/openjdk8:latest
+#FROM openjdk:8
+#COPY target/*.jar spring-boot-docker-0.0.1-SNAPSHOT.jar
+#
+#USER root
+##COPY optumRoot.cer $JAVA_HOME/jre/lib/security
+##COPY splunk-optum-ca.pem $JAVA_HOME/jre/lib/security
+#
+##RUN \
+##    cd $JAVA_HOME/jre/lib/security \
+##    && keytool -keystore cacerts -storepass changeit -noprompt -importcert -alias optumRootcert -file optumRoot.cer \
+##    && keytool -keystore cacerts -storepass changeit -noprompt -importcert -alias optumSplunkCa -file splunk-optum-ca.pem
+#
+#ENTRYPOINT ["java","-jar","spring-boot-docker-0.0.1-SNAPSHOT.jar"]
+
+
+FROM openjdk:8
+COPY ./target/spring-boot-docker-0.0.1-SNAPSHOT.jar /tmp
+WORKDIR /tmp
+ENTRYPOINT ["java","-jar","spring-boot-docker-0.0.1-SNAPSHOT.jar"]
